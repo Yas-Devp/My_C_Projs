@@ -14,13 +14,20 @@ int main(){
 	SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
 	SDL_RenderClear(renderer);
 	
+	SDL_Texture* squareTex2 = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, 100, 100);
+	SDL_SetRenderTarget(renderer, squareTex2);
+	SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+	SDL_RenderClear(renderer);
+	
 	SDL_SetRenderTarget(renderer, NULL);
 	
-	SDL_Rect dst = {270, 190, 100, 100};
+	SDL_Rect dst = {170, 190, 100, 100};
+	SDL_Rect dst2 = {270, 190, 100, 100};
 	
 	float angle = 0.0f;
 	bool running = true;
 	SDL_Event event;
+	
 	
 	while(running){
 		while(SDL_PollEvent(&event)){
@@ -37,6 +44,7 @@ int main(){
 		SDL_RenderClear(renderer);
 		
 		SDL_RenderCopyEx(renderer, squareTex, NULL, &dst, angle, NULL, SDL_FLIP_NONE);
+		SDL_RenderCopyEx(renderer, squareTex2, NULL, &dst2, angle, NULL, SDL_FLIP_NONE);
 		
 		SDL_RenderPresent(renderer);
 		SDL_Delay(16);
